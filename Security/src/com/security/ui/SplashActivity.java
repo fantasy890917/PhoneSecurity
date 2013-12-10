@@ -1,12 +1,20 @@
 package com.security.ui;
 
+import java.io.File;
+
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
@@ -17,6 +25,7 @@ import android.widget.Toast;
 
 import com.security.R;
 import com.security.domain.UpdateInfo;
+import com.security.engine.DownloadTask;
 import com.security.engine.UpdateInfoService;
 
 public class SplashActivity extends Activity
@@ -26,8 +35,18 @@ public class SplashActivity extends Activity
 	
 	private UpdateInfo info;
 	private String version;
+	private ProgressDialog progressDialog;
 	
-	public static final String TAG =  "SplashActivity";
+	public static final String TAG =  "Security";
+	
+	private Handler handler = new Handler(){
+		public void handleMessage(Message msg){
+			if(isNeedUpdate(version))  
+	        {  
+	            showUpdateDialog();  
+	        }
+		}
+	};
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -45,10 +64,10 @@ public class SplashActivity extends Activity
 		alphaAnimation.setDuration(2000);
 		ll.startAnimation(alphaAnimation);
 		
-	//	if(isNeedUpdate(version))  
-    //    {  
-   //         showUpdateDialog();  
-    //    }
+		progressDialog = new ProgressDialog(this);  
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);  
+        progressDialog.setMessage("正在下载...");
+        
 		new Thread()  
 		{  
 		    public void run()   
@@ -64,12 +83,25 @@ public class SplashActivity extends Activity
 		            e.printStackTrace();  
 		        }  
 		    };  
-		}.start(); 
+		}.start();
 		
-		if(isNeedUpdate(version))  
-	        {  
-	            showUpdateDialog();  
-	        }
+		//handdler
+		new Thread()
+		{
+			public void run()
+			{
+				try
+				{
+					sleep(3000);
+					handler.sendEmptyMessage(0);
+				}
+				catch (InterruptedException e)
+				{
+					e.printStackTrace();
+				}
+			};
+		}.start();
+		
 	}
 	
 	private void showUpdateDialog() {
@@ -86,7 +118,24 @@ public class SplashActivity extends Activity
             public void onClick(DialogInterface dialog, int which)  
             {  
                 // TODO Auto-generated method stub  
-                  
+            	if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))  
+                {  
+                    File dir = new File(Environment.getExternalStorageDirectory(), "/security/update");  
+                    if(!dir.exists())  
+                    {  
+                        dir.mkdirs();  
+                    }  
+                    Log.d(TAG,"dirPath: "+dir.getPath());
+                    String apkPath = Environment.getExternalStorageDirectory() + "/security/update/new.apk";  
+                    UpdateTask task = new UpdateTask(info.getUrl(), apkPath);  
+                    progressDialog.show();  
+                    new Thread(task).start();  
+                }  
+                else  
+                {  
+                    Toast.makeText(SplashActivity.this, "SD卡不可用，请插入SD卡", Toast.LENGTH_SHORT).show();  
+                    loadMainUI();  
+                }    
             }  
         });  
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener()  
@@ -96,7 +145,7 @@ public class SplashActivity extends Activity
             public void onClick(DialogInterface dialog, int which)  
             {  
                 // TODO Auto-generated method stub  
-                  
+            	loadMainUI();  
             }  
               
         });  
@@ -116,7 +165,7 @@ public class SplashActivity extends Activity
 	    {  
 	        Log.i(TAG, "当前版本：" + version);  
 	        Log.i(TAG, "最新版本：" + v);  
-	        //loadMainUI();  
+	        loadMainUI();  
 	        return false;  
 	    }  
 	    else  
@@ -142,5 +191,57 @@ public class SplashActivity extends Activity
 			return "版本号未知";
 		}
 	}
-
+	
+	private void loadMainUI()  
+    {  
+        Intent intent = new Intent(this, MainActivity.class);  
+        startActivity(intent);  
+        finish();  
+    }
+	
+	/** 
+     * 安装apk 
+     * @param file 要安装的apk的目录 
+     */  
+    private void install(File file)  
+    {  
+        Intent intent = new Intent();  
+        intent.setAction(Intent.ACTION_VIEW);  
+        intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");  
+        finish();  
+        startActivity(intent);  
+    } 
+    
+	//===========================================================================================  
+    
+    /** 
+     * download thread
+     * 
+     */ 
+	class UpdateTask implements  Runnable{
+		
+		private String path;
+		private String filePath;
+		
+		public UpdateTask(String path,String filePath){
+			this.path=path;
+			this.filePath=filePath;
+		}
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			try{
+				File file = DownloadTask.getFile(path, filePath, progressDialog);
+				progressDialog.dismiss();
+				install(file);
+			}catch(Exception e){
+				e.printStackTrace();  
+                progressDialog.dismiss();  
+                Toast.makeText(SplashActivity.this, "更新失败", Toast.LENGTH_SHORT).show();  
+                loadMainUI(); 
+				
+			}
+		}
+		
+	}
 }
