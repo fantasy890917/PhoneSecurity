@@ -10,6 +10,9 @@ package com.security;
 public final class R {
     public static final class attr {
     }
+    public static final class color {
+        public static final int background=0x7f040000;
+    }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
 
@@ -17,40 +20,69 @@ public final class R {
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     
          */
-        public static final int activity_horizontal_margin=0x7f050000;
-        public static final int activity_vertical_margin=0x7f050001;
+        public static final int activity_horizontal_margin=0x7f060000;
+        public static final int activity_vertical_margin=0x7f060001;
     }
     public static final class drawable {
         public static final int app=0x7f020000;
-        public static final int ic_launcher=0x7f020001;
-        public static final int logo=0x7f020002;
-        public static final int widget01=0x7f020003;
-        public static final int widget02=0x7f020004;
-        public static final int widget03=0x7f020005;
-        public static final int widget04=0x7f020006;
-        public static final int widget05=0x7f020007;
-        public static final int widget06=0x7f020008;
-        public static final int widget07=0x7f020009;
-        public static final int widget08=0x7f02000a;
+        public static final int button_normal=0x7f020001;
+        public static final int button_selector=0x7f020002;
+        public static final int ic_launcher=0x7f020003;
+        public static final int item_background_select=0x7f020004;
+        public static final int item_background_selector=0x7f020005;
+        public static final int logo=0x7f020006;
+        public static final int text_background=0x7f020007;
+        public static final int title_background=0x7f020008;
+        public static final int widget01=0x7f020009;
+        public static final int widget02=0x7f02000a;
+        public static final int widget03=0x7f02000b;
+        public static final int widget04=0x7f02000c;
+        public static final int widget05=0x7f02000d;
+        public static final int widget06=0x7f02000e;
+        public static final int widget07=0x7f02000f;
+        public static final int widget08=0x7f020010;
+        public static final int widget09=0x7f020011;
     }
     public static final class id {
-        public static final int action_settings=0x7f080002;
-        public static final int ll_splash_main=0x7f080000;
-        public static final int tv_splash_version=0x7f080001;
+        public static final int action_settings=0x7f09000c;
+        public static final int bt_protected_first_no=0x7f090003;
+        public static final int bt_protected_first_yes=0x7f090002;
+        public static final int bt_protected_login_no=0x7f090006;
+        public static final int bt_protected_login_yes=0x7f090005;
+        public static final int et_protected_confirm_password=0x7f090001;
+        public static final int et_protected_first_password=0x7f090000;
+        public static final int et_protected_password=0x7f090004;
+        public static final int gv_main=0x7f090007;
+        public static final int iv_main_icon=0x7f090008;
+        public static final int ll_splash_main=0x7f09000a;
+        public static final int tv_main_name=0x7f090009;
+        public static final int tv_splash_version=0x7f09000b;
     }
     public static final class layout {
-        public static final int main=0x7f030000;
-        public static final int splash=0x7f030001;
+        public static final int first_dialog=0x7f030000;
+        public static final int login_dialog=0x7f030001;
+        public static final int main=0x7f030002;
+        public static final int main_item=0x7f030003;
+        public static final int splash=0x7f030004;
     }
     public static final class menu {
-        public static final int main=0x7f070000;
+        public static final int main=0x7f080000;
     }
     public static final class string {
-        public static final int action_settings=0x7f040002;
-        public static final int app_name=0x7f040001;
-        public static final int hello_world=0x7f040003;
-        public static final int serverUrl=0x7f040000;
-        public static final int version=0x7f040004;
+        public static final int action_settings=0x7f050002;
+        public static final int againPassword=0x7f050009;
+        public static final int app_name=0x7f050001;
+        public static final int hello_world=0x7f050003;
+        public static final int inputPassword=0x7f05000d;
+        public static final int login=0x7f05000c;
+        public static final int main=0x7f050005;
+        public static final int protecte=0x7f050006;
+        public static final int protectedNo=0x7f05000b;
+        public static final int protectedYes=0x7f05000a;
+        public static final int serverUrl=0x7f050000;
+        public static final int setPassword=0x7f050007;
+        public static final int setPasswordDescription=0x7f050008;
+        public static final int version=0x7f050004;
     }
     public static final class style {
         /** 
@@ -63,10 +95,13 @@ public final class R {
             backward-compatibility can go here.
         
          */
-        public static final int AppBaseTheme=0x7f060000;
+        public static final int AppBaseTheme=0x7f070000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f060001;
+        public static final int AppTheme=0x7f070001;
+        /**  隐藏系统原来的标题栏 
+         */
+        public static final int MyDialog=0x7f070002;
     }
 }

@@ -157,7 +157,7 @@ public class SplashActivity extends Activity
 		if(info == null)  
 	    {  
 	        Toast.makeText(this, "获取更新信息异常，请稍后再试", Toast.LENGTH_SHORT).show();  
-	        //loadMainUI();  
+	        loadMainUI();  
 	        return false;  
 	    }  
 	    String v = info.getVersion();  

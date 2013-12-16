@@ -6,7 +6,15 @@
     <string name="hello_world">Hello world!</string>
     
     <string name="version">版本号</string>
-    
+    <string name="main">手机卫士</string>
+    <string name="protecte">手机防盗</string>
+    <string name="setPassword">设置密码</string>
+    <string name="setPasswordDescription">设置手机防盗的密码</string>
+    <string name="againPassword">请再次输入密码</string>
+    <string name="protectedYes">确定</string>
+    <string name="protectedNo">取消</string>
+    <string name="login">登陆界面</string>
+    <string name="inputPassword">请输入密码</string>
     
     
     
