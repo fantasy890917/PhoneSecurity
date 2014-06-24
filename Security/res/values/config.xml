@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     
-    <string name="serverUrl">http://192.168.43.20:9090/Security/update.xml</string>
+    <string name="serverUrl">http://192.168.29.69:9090/Security/update.xml</string>
     
 </resources>

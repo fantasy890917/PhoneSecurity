@@ -41,7 +41,6 @@ public class DownloadTask {
                 fos.write(buffer, 0, len);  
                 process += len;  
                 progressDialog.setProgress(process); 
-                Log.d(SplashActivity.TAG, "process:"+process);
             }  
             fos.flush();  
             fos.close();  

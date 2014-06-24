@@ -79,6 +79,10 @@ public final class R {
         public static final int protecte=0x7f050006;
         public static final int protectedNo=0x7f05000b;
         public static final int protectedYes=0x7f05000a;
+        public static final int rename_hint=0x7f050010;
+        public static final int rename_msg=0x7f05000f;
+        public static final int rename_msg_not_null=0x7f050011;
+        public static final int rename_title=0x7f05000e;
         public static final int serverUrl=0x7f050000;
         public static final int setPassword=0x7f050007;
         public static final int setPasswordDescription=0x7f050008;

@@ -16,7 +16,10 @@
     <string name="login">登陆界面</string>
     <string name="inputPassword">请输入密码</string>
     
-    
+    <string name="rename_title">Rename</string>
+    <string name="rename_msg">Please input a new name.</string>
+    <string name="rename_hint">new name</string>
+    <string name="rename_msg_not_null">new name should not be null</string>
     
     
 

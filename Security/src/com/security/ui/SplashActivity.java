@@ -57,7 +57,7 @@ public class SplashActivity extends Activity
 		
 		tv_version = (TextView) findViewById(R.id.tv_splash_version);
 		version = getVersion();
-		tv_version.setText("版本号  " + version);
+		tv_version.setText("version  " + version);
 		
 		ll = (LinearLayout) findViewById(R.id.ll_splash_main);
 		AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
@@ -153,7 +153,6 @@ public class SplashActivity extends Activity
 	}
 	
 	private boolean isNeedUpdate(String version) {
-		 Log.d(TAG, "isNeedUpdate:");
 		if(info == null)  
 	    {  
 	        Toast.makeText(this, "获取更新信息异常，请稍后再试", Toast.LENGTH_SHORT).show();  

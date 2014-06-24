@@ -26,6 +26,16 @@ public class MainActivity extends Activity implements OnItemClickListener
 	private SharedPreferences sp;
 	private MainUIAdapter adapter;
 	
+	private static final int POSITION_ANTI_THEFT = 0;
+	private static final int POSITION_COMMUNI_FUARD = 1;
+	private static final int POSITION_SOFTWARE_MANAGER = 2;
+	private static final int POSITION_DATA_USAGE = 3;
+	private static final int POSITION_TAST_MANAGER= 4;
+	private static final int POSITION_ANTI_VIRUS = 5;
+	private static final int POSITION_SYS_OPTIMIZATION = 6;
+	private static final int POSITION_SENIOR_TOOLS = 7;
+	private static final int POSITION_SETTINGS = 8;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -42,13 +52,13 @@ public class MainActivity extends Activity implements OnItemClickListener
             @Override  
             public boolean onItemLongClick(AdapterView<?> parent, final View view, int position, long id)  
             {  
-                if(position == 0)   //这个是因为，如果我们的手机被盗了，用户一看到第一个手机防盗，那样肯定会先卸载我们的程序的，所以我们在手机防盗这个item里面，设置了一个重命名的功能  
+                if(position == POSITION_ANTI_THEFT)   //这个是因为，如果我们的手机被盗了，用户一看到第一个手机防盗，那样肯定会先卸载我们的程序的，所以我们在手机防盗这个item里面，设置了一个重命名的功能  
                 {  
                     AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);  
-                    builder.setTitle("设置");  
-                    builder.setMessage("请输入要理性的名称");  
+                    builder.setTitle(R.string.rename_title);  
+                    builder.setMessage(R.string.rename_msg);  
                     final EditText et = new EditText(MainActivity.this);  
-                    et.setHint("新名称");  
+                    et.setHint(R.string.rename_hint);  
                     builder.setView(et);  
                     builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener()  
                     {  
@@ -58,7 +68,7 @@ public class MainActivity extends Activity implements OnItemClickListener
                             String name = et.getText().toString();  
                             if(name.equals(""))  
                             {  
-                                Toast.makeText(MainActivity.this, "输入内容不能为空", Toast.LENGTH_SHORT).show();  
+                                Toast.makeText(MainActivity.this, R.string.rename_msg_not_null, Toast.LENGTH_SHORT).show();  
                             }  
                             else  
                             {  
@@ -83,7 +93,7 @@ public class MainActivity extends Activity implements OnItemClickListener
                     });  
                     builder.create().show();  
                 }  
-                return false;  
+                return true;  
             }  
         });  
 	}
