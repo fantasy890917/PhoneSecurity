@@ -94,7 +94,10 @@ public class LostProtectedActivity extends Activity implements OnClickListener{
                     {  
                         Editor editor = sp.edit();  
                         editor.putString("password", MD5Encoder.encode(fp));  
-                        editor.commit();  
+                        editor.commit(); 
+                        dialog.dismiss(); 
+                        //first set password ,go into setup wizard
+                        
                     }  
                     else  
                     {  
