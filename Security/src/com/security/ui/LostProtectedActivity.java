@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.View.OnClickListener;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -74,7 +75,10 @@ public class LostProtectedActivity extends Activity implements OnClickListener{
 	    }  
 	    return true;  
 	} 
-	 
+	
+	 private boolean isSetupWizard(){
+		 return sp.getBoolean("setupWizard", false);
+	 }
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
@@ -97,6 +101,11 @@ public class LostProtectedActivity extends Activity implements OnClickListener{
                         editor.commit(); 
                         dialog.dismiss(); 
                         //first set password ,go into setup wizard
+                        if(!isSetupWizard()){
+                        	finish();
+                        	Intent setupWizardIntent = new Intent(this,SetupGuide1Activity.class);
+                        	startActivity(setupWizardIntent);
+                        }
                         
                     }  
                     else  

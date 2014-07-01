@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     android:orientation="vertical" >
     
     <LinearLayout 
@@ -22,10 +23,11 @@
     
     <GridView
         android:id="@+id/gv_main"
-        android:listSelector="@drawable/item_background_selector" 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:listSelector="@drawable/item_background_selector"
         android:verticalSpacing="8dip"
+        android:layout_marginTop="10dip"
         android:numColumns="2" />
 
 </LinearLayout>
