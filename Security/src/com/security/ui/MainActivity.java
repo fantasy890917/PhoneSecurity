@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.security.R;
 import com.security.adapter.MainUIAdapter;
+import com.security.utils.SecurityInfoUtil;
 
 public class MainActivity extends Activity implements OnItemClickListener
 {
@@ -42,7 +43,7 @@ public class MainActivity extends Activity implements OnItemClickListener
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		
-		sp = this.getSharedPreferences("config", Context.MODE_PRIVATE);
+		sp = this.getSharedPreferences(SecurityInfoUtil.SHARED_OREFERENCE_LIB, Context.MODE_PRIVATE);
 		gridView = (GridView) findViewById(R.id.gv_main);
 		adapter = new MainUIAdapter(this);
 		gridView.setAdapter(adapter);
@@ -73,7 +74,7 @@ public class MainActivity extends Activity implements OnItemClickListener
                             else  
                             {  
                                 Editor editor = sp.edit();  
-                                editor.putString("lostName", name);  
+                                editor.putString(SecurityInfoUtil.ANTI_THEFT_GRIDVIEW_NAME, name);  
                                 editor.commit();  
                                   
                                 TextView tv = (TextView) view.findViewById(R.id.tv_main_name);  

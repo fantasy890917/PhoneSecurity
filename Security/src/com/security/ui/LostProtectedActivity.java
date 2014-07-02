@@ -3,33 +3,42 @@ package com.security.ui;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.view.View.OnClickListener;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.security.R;
 import com.security.utils.MD5Encoder;
+import com.security.utils.SecurityInfoUtil;
 
 public class LostProtectedActivity extends Activity implements OnClickListener{
-	
+
 	private SharedPreferences sp;  
     private Dialog dialog;  
     private EditText password;  
     private EditText confirmPassword; 
+    
+    private TextView mTv_protectNumber;
+    private Button mTv_protectGuide;
+    private CheckBox mCb_isProtected;
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		
-		sp = getSharedPreferences("cofig", Context.MODE_PRIVATE);  
+		sp = getSharedPreferences(SecurityInfoUtil.SHARED_OREFERENCE_LIB, Context.MODE_PRIVATE);  
         
         if(isSetPassword())  
         {  
@@ -69,7 +78,7 @@ public class LostProtectedActivity extends Activity implements OnClickListener{
 	}
 	
 	 private boolean isSetPassword(){  
-	    String pwd = sp.getString("password", "");  
+	    String pwd = sp.getString(SecurityInfoUtil.LOGIN_PASSWORD, "");  
 	    if(pwd.equals("") || pwd == null)  {  
 	       return false;  
 	    }  
@@ -77,7 +86,7 @@ public class LostProtectedActivity extends Activity implements OnClickListener{
 	} 
 	
 	 private boolean isSetupWizard(){
-		 return sp.getBoolean("setupWizard", false);
+		 return sp.getBoolean(SecurityInfoUtil.SETUPWIZARD_CHECKED, false);
 	 }
 	@Override
 	public void onClick(View v) {
@@ -89,7 +98,7 @@ public class LostProtectedActivity extends Activity implements OnClickListener{
                 String cp = confirmPassword.getText().toString().trim();  
                 if(fp.equals("") || cp.equals(""))  
                 {  
-                    Toast.makeText(this, "密码不能为空", Toast.LENGTH_SHORT).show();  
+                    Toast.makeText(this, R.string.password_not_null, Toast.LENGTH_SHORT).show();  
                     return;  
                 }  
                 else   
@@ -97,7 +106,7 @@ public class LostProtectedActivity extends Activity implements OnClickListener{
                     if(fp.equals(cp))  
                     {  
                         Editor editor = sp.edit();  
-                        editor.putString("password", MD5Encoder.encode(fp));  
+                        editor.putString(SecurityInfoUtil.LOGIN_PASSWORD, MD5Encoder.encode(fp));  
                         editor.commit(); 
                         dialog.dismiss(); 
                         //first set password ,go into setup wizard
@@ -110,7 +119,7 @@ public class LostProtectedActivity extends Activity implements OnClickListener{
                     }  
                     else  
                     {  
-                        Toast.makeText(this, "两次密码不相同", Toast.LENGTH_SHORT).show();  
+                        Toast.makeText(this, R.string.password_same, Toast.LENGTH_SHORT).show();  
                         return;  
                     }  
                 }  
@@ -126,18 +135,58 @@ public class LostProtectedActivity extends Activity implements OnClickListener{
                 String pwd = password.getText().toString().toString();  
                 if(pwd.equals(""))  
                 {  
-                    Toast.makeText(this, "请输入密码", Toast.LENGTH_SHORT).show();  
+                    Toast.makeText(this, R.string.inputPassword, Toast.LENGTH_SHORT).show();  
                 }  
                 else  
                 {  
-                    String str = sp.getString("password", "");  
+                    String str = sp.getString(SecurityInfoUtil.LOGIN_PASSWORD, "");  
                     if(MD5Encoder.encode(pwd).equals(str))  
                     {  
                         dialog.dismiss();  
+                    	setContentView(R.layout.lost_protected);
+                    	mTv_protectNumber = (TextView) findViewById(R.id.tv_lost_protected_number);
+                    	mTv_protectGuide = (Button) findViewById(R.id.tv_lost_protected_guide);
+                    	mCb_isProtected = (CheckBox) findViewById(R.id.cb_lost_protected_isProtected);
+                    	mTv_protectNumber.setText("Safety call：" + sp.getString("number", ""));
+                    	mTv_protectGuide.setOnClickListener(this);
+                    	
+                    	boolean isProtecting = sp.getBoolean(SecurityInfoUtil.IS_PROTECTED_CHECKED, false);
+                    	if(isProtecting)  
+                        {  
+                    		mCb_isProtected.setText(R.string.has_open_protect);  
+                    		mCb_isProtected.setChecked(true);  
+                        }else{
+                        	mCb_isProtected.setText(R.string.not_open_protect);  
+                    		mCb_isProtected.setChecked(false);  
+                        }
+                    	
+                    	mCb_isProtected.setOnCheckedChangeListener(new OnCheckedChangeListener(){
+
+							@Override
+							public void onCheckedChanged(CompoundButton buttonView,
+									boolean isChecked) {
+								// TODO Auto-generated method stub
+								if(isChecked)  
+                                {  
+									mCb_isProtected.setText(R.string.has_open_protect);  
+                                    Editor editor = sp.edit();  
+                                    editor.putBoolean(SecurityInfoUtil.IS_PROTECTED_CHECKED, true);  
+                                    editor.commit();  
+                                }  
+                                else  
+                                {  
+                                	mCb_isProtected.setText(R.string.not_open_protect);  
+                                    Editor editor = sp.edit();  
+                                    editor.putBoolean(SecurityInfoUtil.IS_PROTECTED_CHECKED, false);  
+                                    editor.commit();  
+                                }  
+							}
+                    		
+                    	});
                     }  
                     else  
                     {  
-                        Toast.makeText(this, "密码错误", Toast.LENGTH_SHORT).show();  
+                        Toast.makeText(this, R.string.password_is_wrong, Toast.LENGTH_SHORT).show();  
                     }  
                 }  
                 break;  
@@ -146,7 +195,13 @@ public class LostProtectedActivity extends Activity implements OnClickListener{
                 dialog.dismiss();  
                 finish();  
                 break;  
-                  
+            
+            case R.id.tv_lost_protected_guide : //reset into setupWizard  
+                finish();  
+                Intent setupGuideIntent = new Intent(this, SetupGuide1Activity.class);  
+                startActivity(setupGuideIntent);  
+                break;
+                
             default :   
                 break;  
         }  

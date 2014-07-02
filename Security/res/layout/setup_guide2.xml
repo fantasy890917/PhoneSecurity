@@ -26,13 +26,13 @@
             android:layout_width="240dip"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dip"
-            android:text="@string/guide2_item1"/>
+            android:text="@string/bind_button"/>
         
         <CheckBox 
             android:id="@+id/cb_guide_check"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/guide2_item2"/>
+            android:text="@string/guide2_not_bind"/>
         
     </LinearLayout>
     

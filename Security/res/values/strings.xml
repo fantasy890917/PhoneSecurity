@@ -6,6 +6,11 @@
     <string name="hello_world">Hello world!</string>
     
     <string name="version">version</string>
+    <string name="upgrade_dialog_downloading">downloading...</string>
+    <string name="upgrade_dialog_title">Upgrade Attention</string>
+    <string name="upgrade_no_sdcard">no sdcard,please insert</string>
+    <string name="upgrade_exception">Get updates exceptions, please try again later</string>
+    
     <string name="main">Phone Security</string>
     <string name="protecte">Anti-theft</string>
     <string name="setPassword">Set Password</string>
@@ -15,35 +20,58 @@
     <string name="protectedNo">Cancle</string>
     <string name="login">login</string>
     <string name="inputPassword">please input password</string>
-    
+    <string name="password_not_null">password should not be null</string>
+    <string name="password_same">two word should be same</string>
+    <string name="password_is_wrong">password is wrong</string>
     <string name="rename_title">Rename</string>
     <string name="rename_msg">Please input a new name.</string>
     <string name="rename_hint">new name</string>
     <string name="rename_msg_not_null">new name should not be null</string>
     
-    <string name="setupGuide">设置向导</string>
-    <string name="guide1">1.欢迎使用手机防盗</string>
-    <string name="guide1_content">您的手机防盗卫士：</string>
-    <string name="guide1_item1">SIM卡变更报警</string>
-    <string name="guide1_item2">gps追踪</string>
-    <string name="guide1_item3">远程销毁数据</string>
-    <string name="guide1_item4">远程锁屏</string>
-    <string name="guide2">2.手机卡绑定</string>
-    <string name="guide2_content">如果sim卡绑定，如果下次更换的话，就会自动发送短信</string>
-    <string name="guide2_item1">绑定</string>
-    <string name="guide2_item2">没有绑定</string>
-    <string name="guide3">3.设置安全号码</string>
-    <string name="guide3_content">如果sim卡更换后，会把短信发送到该号码上</string>
-    <string name="guide3_item1">请输入一个或选择手机安全号码</string>
-    <string name="guide3_item2">选择联系人</string>
+    <string name="setupGuide">SetupWizard</string>
+    <string name="guide1">1.Welcome to mobile security</string>
+    <string name="guide1_content">Your mobile security guard：</string>
+    <string name="guide1_item1">SIM card changed alarm</string>
+    <string name="guide1_item2">GPS tracking</string>
+    <string name="guide1_item3">Remote Data destruction</string>
+    <string name="guide1_item4">Remote lock screen</string>
+    <string name="guide2">2.Phone bind</string>
+    <string name="guide2_content">Sim card binding, if the next replacement, it would automatically send text messages</string>
+    <string name="guide2_bind">has binded</string>
+    <string name="guide2_not_bind">not bind</string>
+    <string name="bind_button">bind</string>
+    <string name="guide3">3.Set security phone</string>
+    <string name="guide3_content">If the sim card is replaced, will send text messages to this number</string>
+    <string name="guide3_item1">Please enter a security number or select a phone</string>
+    <string name="guide3_item2">Select contacts</string>
     <string name="guide3_number_not_null">security phone number could not be null.</string>
     <string name="selectContact">choose contact</string>
-    <string name="guide4">4.恭喜你，设置已经完成</string>
-    <string name="guide4_content">您的手机设置已经完成</string>
-    <string name="guide4_item1">手机没有开启保护</string>
-    <string name="guide4_item2">手机已经开启保护了</string>
-    <string name="next">下一步</string>
-    <string name="perviout">上一步</string>
-    <string name="finish">完成</string>
-
+    <string name="has_open_protect">has open protect</string>
+    <string name="not_open_protect">not open protect</string>
+    <string name="protect_dialog_title">Attention</string>
+    <string name="protect_dialog_msg">had better open protection</string>
+    
+    <string name="lostProtectedNumber">safety phone number</string>
+    <string name="isProtected">has open pprotect</string>
+    <string name="rePlayGuide">reset into setupWizard</string>
+    
+    <string name="guide4">4.Congratulations, you have completed setting</string>
+    <string name="guide4_content">Your phone settings have been completed</string>
+    <string name="guide4_item1">The phone is not turned on protection</string>
+    <string name="guide4_item2">Phone has switched on protection</string>
+    <string name="next">next</string>
+    <string name="perviout">pervious</string>
+    <string name="finish">finish</string>
+	
+    <string name="grid_view_Phone_theft">phone theft</string>
+    <string name="grid_view_communitcate">Communication guards</string>
+    <string name="grid_view_softManage">Software Management</string>
+    <string name="grid_view_data_usage">Data usage</string>
+    <string name="grid_view_task">Task Management</string>
+    <string name="grid_view_antivirus">Mobile Antivirus</string>
+    <string name="grid_view_optimization">System Optimization</string>
+    <string name="grid_view_tools">Advanced Tools</string>
+    <string name="grid_view_settings">Settings center</string>
+    
+    <string name="sim_changed_attention">Sim card has been changed, the phone may be stolen</string>
 </resources>

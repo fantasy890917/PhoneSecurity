@@ -15,6 +15,8 @@
 	<uses-permission android:name="android.permission.READ_CONTACTS" />  
     <uses-permission android:name="android.permission.WRITE_CONTACTS"/>  
     
+	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>  
+	<uses-permission android:name="android.permission.SEND_SMS"/> 
 	
     <application
         android:allowBackup="true"
@@ -58,12 +60,13 @@
             android:label="@string/selectContact"
             android:name="com.security.ui.SelectContactActivity"></activity>
         
-        <receiver   
-            android:name="com.security.receiver.CallPhoneReceiver">  
-            <intent-filter android:priority="1000"><!-- 把优先级设置高一些，以便第一个拿到广播 -->  
-                <action android:name="android.intent.action.NEW_OUTGOING_CALL"/>  
-            </intent-filter>  
-        </receiver> 
+         <receiver   
+        	android:name="com.security.receiver.BootCompleteReceiver">  
+        	<intent-filter android:priority="1000">  
+            <action android:name="android.intent.action.BOOT_COMPLETED"/><!-- 这个是开机完成后的广播 -->  
+        	</intent-filter>  
+    	</receiver>  
+        
     </application>
 
 </manifest>

@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -15,6 +16,7 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import com.security.R;
+import com.security.utils.SecurityInfoUtil;
 
 public class SetupGuide2Activity extends Activity implements OnClickListener {
 
@@ -31,7 +33,7 @@ public class SetupGuide2Activity extends Activity implements OnClickListener {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.setup_guide2);
-		sp = getSharedPreferences("config", Context.MODE_PRIVATE);
+		sp = getSharedPreferences(SecurityInfoUtil.SHARED_OREFERENCE_LIB, Context.MODE_PRIVATE);
 		bt_bind = (Button) findViewById(R.id.bt_guide_bind);
 		bt_next = (Button) findViewById(R.id.bt_guide_next);
 		bt_perviout = (Button) findViewById(R.id.bt_guide_pervious);
@@ -41,15 +43,15 @@ public class SetupGuide2Activity extends Activity implements OnClickListener {
 		
 		cb_bind = (CheckBox)findViewById(R.id.cb_guide_check);
 		//init checkBox
-		String sim = sp.getString("simSerial", null);
+		String sim = sp.getString(SecurityInfoUtil.BIND_SIM_CARD_SERIAL, null);
 		if(sim != null)
 		{
-			cb_bind.setText("已经绑定");
+			cb_bind.setText(R.string.guide2_bind);
 			cb_bind.setChecked(true);
 		}
 		else
 		{
-			cb_bind.setText("没有绑定");
+			cb_bind.setText(R.string.guide2_not_bind);
 			cb_bind.setChecked(false);
 		}
 		
@@ -60,10 +62,10 @@ public class SetupGuide2Activity extends Activity implements OnClickListener {
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				// TODO Auto-generated method stub
 				if(isChecked){
-					cb_bind.setText("已经绑定");
+					cb_bind.setText(R.string.guide2_bind);
 					setSimInfo();
 				}else{
-					cb_bind.setText("没有绑定");
+					cb_bind.setText(R.string.guide2_not_bind);
 				}
 			}
 			
@@ -77,7 +79,7 @@ public class SetupGuide2Activity extends Activity implements OnClickListener {
 			case R.id.bt_guide_bind:
 				setSimInfo();
 				cb_bind.setChecked(true);
-				cb_bind.setText("已经绑定");
+				cb_bind.setText(R.string.guide2_bind);
 				break;
 			
 			case R.id.bt_guide_pervious:
@@ -105,8 +107,9 @@ public class SetupGuide2Activity extends Activity implements OnClickListener {
 	{
 		TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
 		String simSerial = telephonyManager.getSimSerialNumber();//拿到sim卡的序列号，是唯一的
+		Log.d("shiguibiao","sim info = "+simSerial);
 		Editor editor = sp.edit();
-		editor.putString("simSerial", simSerial);
+		editor.putString(SecurityInfoUtil.BIND_SIM_CARD_SERIAL, simSerial);
 		editor.commit();
 	}
 }

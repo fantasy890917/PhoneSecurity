@@ -13,8 +13,16 @@ import com.security.R;
 
 public class MainUIAdapter extends BaseAdapter{
 	
-	private static final String [] NAMES = new String []{"手机防盗", "通讯卫士", "软件管理",
-								"流量管理", "任务管理", "手机杀毒", "系统优化","高级工具", "设置中心"};
+	private static final int [] NAMES = new int []{
+		R.string.grid_view_Phone_theft, 
+		R.string.grid_view_communitcate, 
+		R.string.grid_view_softManage,
+		R.string.grid_view_data_usage, 
+		R.string.grid_view_task, 
+		R.string.grid_view_antivirus, 
+		R.string.grid_view_optimization,
+		R.string.grid_view_tools,
+		R.string.grid_view_settings};
 	
 	private static final int [] ICONS = new int [] {R.drawable.widget01, R.drawable.widget02, R.drawable.widget03,
 		R.drawable.widget04, R.drawable.widget05, R.drawable.widget06, R.drawable.widget07, R.drawable.widget08, R.drawable.widget09 };

@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.security.R;
 import com.security.domain.ContactInfo;
 import com.security.engine.ContactInfoService;
+import com.security.utils.SecurityInfoUtil;
 
 public class SelectContactActivity extends Activity{
 	
@@ -43,7 +44,7 @@ public class SelectContactActivity extends Activity{
 				// TODO Auto-generated method stub
 				String number = mList_info.get(position).getPhone();
 				Intent intent = new Intent();
-				intent.putExtra("number", number);
+				intent.putExtra(SecurityInfoUtil.PROTECTED_PHONE_NUMBER, number);
 				//onActivityResult(int, int, Intent) get it
 				setResult(1,intent);
 				

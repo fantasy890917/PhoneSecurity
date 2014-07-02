@@ -66,7 +66,7 @@ public class SplashActivity extends Activity
 		
 		progressDialog = new ProgressDialog(this);  
         progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);  
-        progressDialog.setMessage("正在下载...");
+        progressDialog.setMessage(getResources().getText(R.string.upgrade_dialog_downloading));
         
 		new Thread()  
 		{  
@@ -106,12 +106,12 @@ public class SplashActivity extends Activity
 	
 	private void showUpdateDialog() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("升级提醒");
+		builder.setTitle(R.string.upgrade_dialog_title);
 		builder.setIcon(android.R.drawable.ic_dialog_info);
 		builder.setMessage(info.getDescription());
 		builder.setCancelable(false); 
 		
-		builder.setPositiveButton("确定", new DialogInterface.OnClickListener()  
+		builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener()  
         {  
               
             @Override  
@@ -133,12 +133,12 @@ public class SplashActivity extends Activity
                 }  
                 else  
                 {  
-                    Toast.makeText(SplashActivity.this, "SD卡不可用，请插入SD卡", Toast.LENGTH_SHORT).show();  
+                    Toast.makeText(SplashActivity.this, R.string.upgrade_no_sdcard, Toast.LENGTH_SHORT).show();  
                     loadMainUI();  
                 }    
             }  
         });  
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener()  
+        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener()  
         {  
   
             @Override  
@@ -155,21 +155,21 @@ public class SplashActivity extends Activity
 	private boolean isNeedUpdate(String version) {
 		if(info == null)  
 	    {  
-	        Toast.makeText(this, "获取更新信息异常，请稍后再试", Toast.LENGTH_SHORT).show();  
+	        Toast.makeText(this, R.string.upgrade_exception, Toast.LENGTH_SHORT).show();  
 	        loadMainUI();  
 	        return false;  
 	    }  
 	    String v = info.getVersion();  
 	    if(v.equals(version))  
 	    {  
-	        Log.i(TAG, "当前版本：" + version);  
-	        Log.i(TAG, "最新版本：" + v);  
+	        Log.i(TAG, "current version：" + version);  
+	        Log.i(TAG, "last version：" + v);  
 	        loadMainUI();  
 	        return false;  
 	    }  
 	    else  
 	    {  
-	        Log.i(TAG, "需要更新");  
+	        Log.i(TAG, "need update ");  
 	        return true;  
 	    }  
 	}
