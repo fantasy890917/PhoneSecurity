@@ -2,6 +2,8 @@ package com.security.ui;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,6 +18,7 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import com.security.R;
+import com.security.receiver.MyAdminReceiver;
 import com.security.utils.SecurityInfoUtil;
 
 public class SetupGuide4Activity extends Activity implements OnClickListener {
@@ -82,6 +85,8 @@ public class SetupGuide4Activity extends Activity implements OnClickListener {
 			case R.id.bt_guide_finish :
 				
 				if(mCb_protected.isChecked()){
+					
+					finishSetupGuide();
 					finish();
 				}else{
 					AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -125,5 +130,22 @@ public class SetupGuide4Activity extends Activity implements OnClickListener {
 				break;
 		}
 	}
-
+	
+	private void finishSetupGuide(){
+		// setupWizard completed
+		Editor editor = sp.edit();  
+        editor.putBoolean(SecurityInfoUtil.SETUPWIZARD_CHECKED, true); 
+        editor.commit();  
+        
+        //get device 
+        DevicePolicyManager devicePolicyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
+        
+        //new component to start ui
+        ComponentName componentName = new ComponentName(this,MyAdminReceiver.class);
+        if(!devicePolicyManager.isAdminActive(componentName)){
+        	Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
+        	intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, componentName);
+        	startActivity(intent);
+        }
+	}
 }

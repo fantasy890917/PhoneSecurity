@@ -74,4 +74,7 @@
     <string name="grid_view_settings">Settings center</string>
     
     <string name="sim_changed_attention">Sim card has been changed, the phone may be stolen</string>
+
+	<string name="number_query">Phone numbers for attribution</string>
+	<string name="bt_query">query</string>
 </resources>

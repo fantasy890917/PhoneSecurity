@@ -36,4 +36,9 @@ public class SecurityInfoUtil {
 	 * protected number
 	 */
 	public static final String PROTECTED_PHONE_NUMBER ="number";
+	
+	/**
+	 *  gps location
+	 */
+		public static final String GPS_LOCATION_RECORD="lastLocation";
 }
