@@ -40,5 +40,11 @@ public class SecurityInfoUtil {
 	/**
 	 *  gps location
 	 */
-		public static final String GPS_LOCATION_RECORD="lastLocation";
+	public static final String GPS_LOCATION_RECORD="lastLocation";
+	
+	/**
+	 * checkbox phone number service
+	 */
+	public static final String PHONE_NUMBER_SERVICE_STATE ="phone_number_service";
+		
 }

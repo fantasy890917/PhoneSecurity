@@ -44,6 +44,7 @@ public class SetupGuide2Activity extends Activity implements OnClickListener {
 		cb_bind = (CheckBox)findViewById(R.id.cb_guide_check);
 		//init checkBox
 		String sim = sp.getString(SecurityInfoUtil.BIND_SIM_CARD_SERIAL, null);
+		Log.d("shiguibiao","SM saved sn ="+sim);
 		if(sim != null)
 		{
 			cb_bind.setText(R.string.guide2_bind);
@@ -63,9 +64,10 @@ public class SetupGuide2Activity extends Activity implements OnClickListener {
 				// TODO Auto-generated method stub
 				if(isChecked){
 					cb_bind.setText(R.string.guide2_bind);
-					setSimInfo();
+					setSimInfo(true);
 				}else{
 					cb_bind.setText(R.string.guide2_not_bind);
+					setSimInfo(false);
 				}
 			}
 			
@@ -77,7 +79,7 @@ public class SetupGuide2Activity extends Activity implements OnClickListener {
 		// TODO Auto-generated method stub
 		switch(v.getId()){
 			case R.id.bt_guide_bind:
-				setSimInfo();
+				setSimInfo(true);
 				cb_bind.setChecked(true);
 				cb_bind.setText(R.string.guide2_bind);
 				break;
@@ -103,13 +105,18 @@ public class SetupGuide2Activity extends Activity implements OnClickListener {
 		}
 	}
 	
-	private void setSimInfo()
+	private void setSimInfo(boolean setFlag)
 	{
 		TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
 		String simSerial = telephonyManager.getSimSerialNumber();//拿到sim卡的序列号，是唯一的
-		Log.d("shiguibiao","sim info = "+simSerial);
+
 		Editor editor = sp.edit();
-		editor.putString(SecurityInfoUtil.BIND_SIM_CARD_SERIAL, simSerial);
+		if(setFlag){
+			editor.putString(SecurityInfoUtil.BIND_SIM_CARD_SERIAL, simSerial);
+		}else{
+			editor.remove(SecurityInfoUtil.BIND_SIM_CARD_SERIAL);
+		}
+		
 		editor.commit();
 	}
 }

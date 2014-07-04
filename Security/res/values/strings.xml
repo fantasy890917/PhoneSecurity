@@ -77,4 +77,7 @@
 
 	<string name="number_query">Phone numbers for attribution</string>
 	<string name="bt_query">query</string>
+	<string name="number_service">Set the phone service</string>
+    <string name="number_service_state_not_open">Attribution service is not open</string>
+    <string name="number_service_state_open">Attribution service has opened</string>
 </resources>

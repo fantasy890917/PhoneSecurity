@@ -108,6 +108,7 @@ public class MainActivity extends Activity implements OnItemClickListener
             case 0 : //手机防盗 
             	Intent intentProtect = new Intent(this,LostProtectedActivity.class);
                 startActivity(intentProtect);  
+                break;
                   
             case 1 : //通讯卫士  
             	Intent intentPhone = new Intent(this,QueryNumberActivity.class);

@@ -19,6 +19,9 @@ public class NumberAddressService {
 	private static NumberAddressService numberAddressService;
 	private Context context;
 	
+	private static final String PATH = Environment.getExternalStorageDirectory()+ "/Security/data.db";
+	
+	private static final String DIR_PATH = Environment.getExternalStorageDirectory()+ "/Security";
 	private NumberAddressService(){
 
 	}
@@ -101,9 +104,8 @@ public class NumberAddressService {
 	
 	private  String query(String sql, String[] selectionArgs){
 		String result = "";
-		String path = Environment.getExternalStorageDirectory()+ "/Security/db/data.db";
 		
-		SQLiteDatabase db = getAddressDB(path);
+		SQLiteDatabase db = getAddressDB(PATH);
 		
 		if(db.isOpen()){
 			Cursor cursor = db.rawQuery(sql, selectionArgs);
@@ -117,15 +119,18 @@ public class NumberAddressService {
 	}
 	
 	private  SQLiteDatabase getAddressDB(String path){
-		Log.d("shiguibiao","getAddressDB");
-		String dirPath = Environment.getExternalStorageDirectory()+ "/Security/db";
-		File dir = new File( Environment.getExternalStorageDirectory(),"/Security/db");
+		/*
+		Log.d("shiguibiao","path ="+path);
+		
+		File dir = new File( DIR_PATH);
+		
+		Log.d("shiguibiao","dirth ="+DIR_PATH);
 		
 		if(!dir.exists()){
 			Log.d("shiguibiao","mkdir");
 			dir.mkdir();
 		}
-		File file = new File(dir,"data.db");
+		
 		if(file.exists()){
 			return SQLiteDatabase.openDatabase(path, null, SQLiteDatabase.OPEN_READONLY);
 		}else{
@@ -135,12 +140,13 @@ public class NumberAddressService {
 				InputStream in = context.getApplicationContext()
 						.getResources().openRawResource(R.raw.address);
 				FileOutputStream fos = new FileOutputStream(file);
-				byte[] buffer = new byte[1024];
+				byte[] buffer = new byte[in.available()];
 				while(in.read(buffer) != -1){
 					in.read(buffer);
 					fos.write(buffer);
+					fos.flush();
+					Log.d("shiguibiao","write");
 				}
-				
 				in.close();
 				fos.close();
 			}catch(FileNotFoundException  e){
@@ -148,8 +154,41 @@ public class NumberAddressService {
 			}catch(IOException e){
 				e.printStackTrace();
 			}
-			
+			*/
 			return SQLiteDatabase.openDatabase(path, null, SQLiteDatabase.OPEN_READONLY);
+		//}
+		
+	}
+	
+	public void loadDBFile(){
+		
+		File dir = new File( DIR_PATH);
+		if(!dir.exists()){
+
+			dir.mkdir();
+		}
+		File file = new File(DIR_PATH,"data.db");
+		if(!file.exists()){
+			try{
+				file.createNewFile();
+
+				InputStream in = context.getApplicationContext()
+						.getResources().openRawResource(R.raw.address);
+				FileOutputStream fos = new FileOutputStream(file);
+				byte[] buffer = new byte[in.available()];
+				while(in.read(buffer) != -1){
+					//in.read(buffer); //which make half file copyed
+					fos.write(buffer);
+					fos.flush();
+
+				}
+				in.close();
+				fos.close();
+			}catch(FileNotFoundException  e){
+		        e.printStackTrace();
+			}catch(IOException e){
+				e.printStackTrace();
+			}
 		}
 		
 	}
