@@ -61,6 +61,34 @@
         android:layout_marginBottom="8dip"
         android:background="#aabc04e5"/>
     
+    <TextView 
+        android:id="@+id/tv_atool_select_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:text="@string/select_bg"/>
+    
+    <View 
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_marginTop="8dip"
+        android:layout_marginBottom="8dip"
+        android:background="#aabc04e5"/>
+    
+    <TextView 
+        android:id="@+id/tv_atool_change_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:text="@string/number_display"/>
+    
+    <View 
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_marginTop="8dip"
+        android:layout_marginBottom="8dip"
+        android:background="#aabc04e5"/>
+    
     <EditText   
         android:id="@+id/et_query_number"  
         android:layout_width="match_parent"  

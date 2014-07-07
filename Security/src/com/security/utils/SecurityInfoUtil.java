@@ -46,5 +46,9 @@ public class SecurityInfoUtil {
 	 * checkbox phone number service
 	 */
 	public static final String PHONE_NUMBER_SERVICE_STATE ="phone_number_service";
-		
+	
+	/**
+	 * background
+	 */
+	public static final String TOAST_BACKGROUND ="background";	
 }

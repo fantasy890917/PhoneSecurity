@@ -1,7 +1,10 @@
 package com.security.ui;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -32,6 +35,8 @@ public class QueryNumberActivity extends Activity implements OnClickListener{
 	
 	private CheckBox mCb_open_service;
 	private TextView mTv_service_state;
+	private TextView mTv_toast_bg;
+	private TextView mTv_toast_location;
 	
 	private Intent serviceIntent;
 	private Thread loadDBThread;
@@ -48,6 +53,12 @@ public class QueryNumberActivity extends Activity implements OnClickListener{
 		mEt_query_number = (EditText) findViewById(R.id.et_query_number);
 		mTv_query_result =(TextView) findViewById(R.id.tv_query_result);
 		
+		//set style of Toast
+		mTv_toast_bg = (TextView) findViewById(R.id.tv_atool_select_bg);
+		mTv_toast_location = (TextView) findViewById(R.id.tv_atool_change_location);
+		mTv_toast_bg.setOnClickListener(this);
+		mTv_toast_location.setOnClickListener(this);
+		//query
 		mBt_query.setOnClickListener(this);
 		
 		loadDBThread = new Thread(){
@@ -106,6 +117,16 @@ public class QueryNumberActivity extends Activity implements OnClickListener{
 			case R.id.bt_query:
 				query();
 				break;
+			
+			case R.id.tv_atool_select_bg :   
+                selectStyle();  
+                break; 
+                
+			 case R.id.tv_atool_change_location :   
+	              Intent intent = new Intent(this, DragViewActivity.class);  
+	              startActivity(intent);  
+	              break;
+                
 			default:
 				break;
 		}
@@ -129,6 +150,34 @@ public class QueryNumberActivity extends Activity implements OnClickListener{
             String address = NumberAddressService.getInstance(this).getAddress(number);  
             mTv_query_result.setText("归属地信息：" + address);  
         }  
+	}
+	
+	private void selectStyle(){
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("归属地显示风格");
+		String[] items = new String[] {"半透明", "活力橙", "苹果绿", "孔雀蓝", "金属灰"};
+		int selectedItem = sp.getInt(SecurityInfoUtil.TOAST_BACKGROUND, 0);
+		builder.setSingleChoiceItems(items, selectedItem, new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				Editor editor = sp.edit(); 
+				editor.putInt(SecurityInfoUtil.TOAST_BACKGROUND, which);
+				editor.commit();
+			}
+		});
+		
+		builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
+		
+		builder.create().show();
 	}
 
 }

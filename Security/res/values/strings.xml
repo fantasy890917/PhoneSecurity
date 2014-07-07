@@ -64,12 +64,12 @@
     <string name="finish">finish</string>
 	
     <string name="grid_view_Phone_theft">phone theft</string>
-    <string name="grid_view_communitcate">Communication guards</string>
-    <string name="grid_view_softManage">Software Management</string>
+    <string name="grid_view_communitcate">通讯卫士</string>
+    <string name="grid_view_softManage">软件管理</string>
     <string name="grid_view_data_usage">Data usage</string>
     <string name="grid_view_task">Task Management</string>
     <string name="grid_view_antivirus">Mobile Antivirus</string>
-    <string name="grid_view_optimization">System Optimization</string>
+    <string name="grid_view_optimization">系统优化</string>
     <string name="grid_view_tools">Advanced Tools</string>
     <string name="grid_view_settings">Settings center</string>
     
@@ -80,4 +80,12 @@
 	<string name="number_service">Set the phone service</string>
     <string name="number_service_state_not_open">Attribution service is not open</string>
     <string name="number_service_state_open">Attribution service has opened</string>
+    <string name="select_bg">归属地显示风格</string>
+    <string name="number_display">归属地显示位置</string>
+    <string name="drag_view_desc">拖动紫色方块来确定归属地显示位置</string>
+    
+    <string name="numberSecurity">通信卫士</string>
+    <string name="add">添加</string>
+    <string name="update_number">修改黑名单</string>
+    <string name="delete_number">删除黑名单</string>
 </resources>

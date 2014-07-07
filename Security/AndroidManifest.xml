@@ -17,9 +17,12 @@
     <uses-permission android:name="android.permission.WRITE_CONTACTS"/>  
     
 	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>  
-	<uses-permission android:name="android.permission.SEND_SMS"/> 
-	
-	<uses-permission android:name="android.permission.RECEIVE_SMS"/>
+	<uses-permission android:name="android.permission.READ_SMS" />  
+    <uses-permission android:name="android.permission.WRITE_SMS" />  
+    <uses-permission android:name="android.permission.SEND_SMS" />  
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />  
+    <uses-permission android:name="android.permission.RECEIVE_WAP_PUSH" />  
+    <uses-permission android:name="android.permission.RECEIVE_MMS" />
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>  
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> 
 	
@@ -69,6 +72,11 @@
             android:label="@string/app_name"
             android:name="com.security.ui.QueryNumberActivity"></activity>
          
+          <activity 
+            android:theme="@android:style/Theme.Translucent"
+            android:name="com.security.ui.DragViewActivity" ></activity>
+          
+          <!-- receiver -->
          <receiver   
         	android:name="com.security.receiver.BootCompleteReceiver">  
         	<intent-filter android:priority="1000"> 
@@ -80,7 +88,7 @@
              android:name="com.security.receiver.SmsReceiver">
         	 <intent-filter
         	     android:priority="1000">
-        	     <action android:name="android.provider.Telephony.SMS_RECEIVE" />D
+        	     <action android:name="android.provider.Telephony.SMS_RECEIVED" />
         	 </intent-filter>            
          </receiver>
          
@@ -88,12 +96,17 @@
              android:name="com.security.receiver.MyAdminReceiver">
             <meta-data
                 android:name="android.app.device_admin"
-                android:resource="@xml/myadmin"
-			 />
+                android:resource="@xml/myadmin"/>
             <intent-filter >
                 <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
             </intent-filter>
          </receiver>
+         
+         <!-- 开启来电归属地服务 --> 
+         <service 
+            android:name="com.security.service.PhoneAddressService">
+         </service>
+         
     </application>
 
 </manifest>
