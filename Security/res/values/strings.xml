@@ -88,4 +88,7 @@
     <string name="add">添加</string>
     <string name="update_number">修改黑名单</string>
     <string name="delete_number">删除黑名单</string>
+    <string name="black_number">通信卫士</string>
+    <string name="sms_backup">短信备份</string>
+    <string name="sms_reset">短信还原</string>
 </resources>
