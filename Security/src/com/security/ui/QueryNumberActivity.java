@@ -38,6 +38,8 @@ public class QueryNumberActivity extends Activity implements OnClickListener{
 	private TextView mTv_toast_bg;
 	private TextView mTv_toast_location;
 	
+	//add blacknumber textView
+	private TextView mTv_black_number ;
 	private Intent serviceIntent;
 	private Thread loadDBThread;
 	private boolean threadFlag = false ;
@@ -52,12 +54,14 @@ public class QueryNumberActivity extends Activity implements OnClickListener{
 		mBt_query = (Button) findViewById(R.id.bt_query);
 		mEt_query_number = (EditText) findViewById(R.id.et_query_number);
 		mTv_query_result =(TextView) findViewById(R.id.tv_query_result);
-		
+		mTv_black_number = (TextView) findViewById(R.id.tv_atool_black_number);
+		mTv_black_number.setOnClickListener(this);
 		//set style of Toast
 		mTv_toast_bg = (TextView) findViewById(R.id.tv_atool_select_bg);
 		mTv_toast_location = (TextView) findViewById(R.id.tv_atool_change_location);
 		mTv_toast_bg.setOnClickListener(this);
 		mTv_toast_location.setOnClickListener(this);
+		
 		//query
 		mBt_query.setOnClickListener(this);
 		
@@ -126,8 +130,12 @@ public class QueryNumberActivity extends Activity implements OnClickListener{
 	              Intent intent = new Intent(this, DragViewActivity.class);  
 	              startActivity(intent);  
 	              break;
-                
-			default:
+			 case R.id.tv_atool_black_number:
+				 Intent blackNumIntent = new Intent(this,BlackNumberActivity.class);
+				 startActivity(blackNumIntent);
+				 break;
+				 
+			 default:
 				break;
 		}
 	}

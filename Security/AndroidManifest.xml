@@ -71,7 +71,10 @@
          <activity 
             android:label="@string/app_name"
             android:name="com.security.ui.QueryNumberActivity"></activity>
-         
+         <!-- 通信黑名单 BlackNumberActivity-->
+         <activity 
+            android:label="@string/black_number"
+            android:name="com.security.ui.BlackNumberActivity"></activity>
           <activity 
             android:theme="@android:style/Theme.Translucent"
             android:name="com.security.ui.DragViewActivity" ></activity>

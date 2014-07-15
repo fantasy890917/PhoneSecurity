@@ -25,7 +25,7 @@ public class BlackNumberDataBaseAdapter {
 	
 	private Context mContext ;
 	
-	private static final String DB_CREATE = "CREATE TABLE" 
+	private static final String DB_CREATE = "CREATE TABLE " 
 											+ DB_TABLE +"("
 											+ KEY_ID
 											+ " INTEGER PRIMARY KEY,"

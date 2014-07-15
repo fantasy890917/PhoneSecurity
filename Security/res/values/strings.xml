@@ -91,4 +91,12 @@
     <string name="black_number">通信卫士</string>
     <string name="sms_backup">短信备份</string>
     <string name="sms_reset">短信还原</string>
+    <string name="add_black_number">添加黑名单</string>
+    <string name="hint_black_number">请输入黑名单号码</string>
+    <string name="button_add_msg">添加</string>
+    <string name="button_cancle_msg">取消</string>
+    <string name="button_modify_msg">修改</string>
+    <string name="number_not_null_msg">添加号码不能为空</string>
+    <string name="update_black_number_title">更新黑名单</string>
+    <string name="update_black_number_msg">请输入新的号码</string>
 </resources>
